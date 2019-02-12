@@ -24,7 +24,15 @@
       });
     },
     bootstrap(node) {
-      // code
+      if (!node) {
+        const appWrapper = document.querySelector('[ng-app]');
+        const child = appWrapper.children;
+
+        [...child].map(item => this.compile(item));
+      }
+      [...node.children].map(item => this.compile(item));
     }
   };
+
+  window.smallAngular = smallAngular;
 }());
