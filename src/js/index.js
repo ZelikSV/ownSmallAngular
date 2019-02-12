@@ -1,15 +1,6 @@
 
 (function() {
-  const directives = [{
-    name: 'ng-click',
-    func(e, cb) {
-      e.addEventListener('click', function() {
-        const fn = new Function(cb);
-        fn();
-      });
-    }
-  }
-  ];
+  const directives = [];
   const smallAngular = {
     directive(name, cb) {
       directives.push({ name, func: cb });
@@ -25,9 +16,9 @@
     },
     bootstrap(node = '[ng-app]') {
       const appWrapper = document.querySelector(node);
-      const child = appWrapper.children;
+      const child = appWrapper.querySelectorAll('*');
 
-      [...child].forEach(item => this.compile(item));
+      child.forEach(item => this.compile(item));
     }
   };
 
@@ -46,5 +37,7 @@ smallAngular.directive('ng-make-short', function(el) {
 smallAngular.directive('ng-bind', function(el) {
   console.log('called directive ng-bind on element', el);
 });
-
+smallAngular.directive('ng-make-long', function(el) {
+  console.log('called directive ng-make-long on element', el);
+});
 smallAngular.bootstrap();
