@@ -37,14 +37,14 @@
 smallAngular.directive('ng-show', function(el) {
   console.log('called directive ng-show on element', el);
 });
-smallAngular.directive('ng-module', function(el) {
-  console.log('called directive ng-show on element', el);
+smallAngular.directive('ng-model', function(el) {
+  console.log('called directive ng-model on element', el);
 });
 smallAngular.directive('ng-make-short', function(el) {
-  console.log('called directive ng-show on element', el);
+  console.log('called directive ng-make-short on element', el);
 });
 smallAngular.directive('ng-bind', function(el) {
-  console.log('called directive ng-show on element', el);
+  console.log('called directive ng-bind on element', el);
 });
 
 smallAngular.bootstrap();
