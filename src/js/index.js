@@ -13,7 +13,15 @@
       directives.push({ name, functions: cb });
     },
     compile(node) {
-      // code
+      directives.forEach(item => {
+        for (let i = 0; i < node.attributes.length; i++) {
+          if (node.attributes[i].name === item.name) {
+            item.functions.forEach(fun => {
+              fun(node, node.attributes[i].value);
+            });
+          }
+        }
+      });
     },
     bootstrap(node) {
       // code
