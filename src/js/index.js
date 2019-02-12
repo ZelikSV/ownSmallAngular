@@ -10,7 +10,7 @@
   ];
   const smallAngular = {
     directive(name, cb) {
-      // code
+      directives.push({ name, functions: cb });
     },
     compile(node) {
       // code
