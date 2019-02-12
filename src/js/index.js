@@ -17,7 +17,7 @@
     bootstrap(node = '[ng-app]') {
       const appWrapper = document.querySelector(node);
       const child = appWrapper.querySelectorAll('*');
-
+      this.compile(appWrapper);
       child.forEach(item => this.compile(item));
     }
   };
