@@ -1,7 +1,12 @@
 (function() {
   const directives = [{
-    name: 'ng-click',
-    functions: []
+    name: 'ng_click',
+    function(e, cb) {
+      e.addEventListener('click', function() {
+        const fn = new Function(cb);
+        fn();
+      });
+    }
   },
   {
     name: 'ng-module',
@@ -16,9 +21,7 @@
       directives.forEach(item => {
         for (let i = 0; i < node.attributes.length; i++) {
           if (node.attributes[i].name === item.name) {
-            item.functions.forEach(fun => {
-              fun(node, node.attributes[i].value);
-            });
+            item.function(node, node.attributes[i].value);
           }
         }
       });
@@ -28,9 +31,9 @@
         const appWrapper = document.querySelector('[ng-app]');
         const child = appWrapper.children;
 
-        [...child].map(item => this.compile(item));
+        [...child].forEach(item => this.compile(item));
       }
-      [...node.children].map(item => this.compile(item));
+      [...node.children].forEach(item => this.compile(item));
     }
   };
 
