@@ -69,11 +69,17 @@
   smallAngular.directive('ng-bind', function(scopeRoot, el) {
     const data = el.getAttribute('ng-bind');
 
-    el.innerHTML = scopeRoot.find(data);
     scopeRoot.$watch(data, () => {
-      el.innerHTML = scopeRoot.find(data);
+      el.innerHTML = scopeRoot[data];
     });
-    scopeRoot.$apply();
+  });
+
+  smallAngular.directive('ng-model', function(scopeRoot, el) {
+    el.addEventListener('input', function(e) {
+      const data = el.getAttribute('ng-model');
+      scopeRoot[data] = el.value;
+      scopeRoot.$apply();
+    });
   });
 
   window.smallAngular = smallAngular;
