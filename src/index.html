@@ -7,15 +7,15 @@
   <title>Angular</title>
 </head>
 
-<body ng-app ng-init="name='serhii'">
-    <div ng-show="true"> hi Ivan!!! </div>
+<body ng-app>
+    <div ng-show="test === false"> hi Ivan!!! </div>
     <input ng-model="name"/>
     <p ng-make-short>qqq qqq qqq qqq qqq qqq qqq</p>
     <p ng-bind="name"></p>
     <ul>
       <li ng-make-long="some">One</li>
     </ul>
-    <button ng-click="name='guffey'">Click Me</button>
+    <button ng-click="test = !test">Click Me</button>
 </body>
 
 </html>

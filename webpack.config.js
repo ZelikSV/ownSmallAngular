@@ -10,6 +10,7 @@ module.exports = {
     libraryTarget: 'var',
     library: 'EntryPoint'
   },
+  mode: 'development',
   module: {
     rules: [
       {
