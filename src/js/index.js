@@ -1,4 +1,3 @@
-
 (function() {
   const directives = [];
   const watchers = [];
@@ -18,7 +17,7 @@
       directives.forEach(item => {
         for (let i = 0; i < node.attributes.length; i++) {
           if (node.attributes[i].name === item.name) {
-            item.func(scopeRoot, node, node.attributes[i].value);
+            item.func(scopeRoot, node, null);
           }
         }
       });
@@ -37,11 +36,15 @@
   smallAngular.directive('ng-model', function(el) {
     return null;
   });
-  smallAngular.directive('ng-click', function(el) {
-    return null;
+  smallAngular.directive('ng-click', function(scopeRoot, el) {
+    el.addEventListener('click', function(e) {
+      const data = el.getAttribute('ng-click');
+      scopeRoot.eval(data);
+    });
   });
 
   window.smallAngular = smallAngular;
+
+  smallAngular.bootstrap();
 }());
 
-smallAngular.bootstrap();
