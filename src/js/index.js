@@ -1,6 +1,15 @@
 
 (function() {
   const directives = [];
+  const watchers = [];
+  const scopeRoot = window;
+  scopeRoot.$watch = watcher => {
+    watchers.push(watcher);
+  };
+  scopeRoot.$apply = () => {
+    watchers.forEach(watcher => watcher());
+  };
+
   const smallAngular = {
     directive(name, cb) {
       directives.push({ name, func: cb });
@@ -9,7 +18,7 @@
       directives.forEach(item => {
         for (let i = 0; i < node.attributes.length; i++) {
           if (node.attributes[i].name === item.name) {
-            item.func(node, node.attributes[i].value);
+            item.func(scopeRoot, node, node.attributes[i].value);
           }
         }
       });
@@ -24,13 +33,13 @@
 
   smallAngular.directive('ng-show', function(el) {
     return null;
-   });
-   smallAngular.directive('ng-model', function(el) {
-     return null;
-   });
-   smallAngular.directive('ng-click', function(el) {
-     return null;
-   });
+  });
+  smallAngular.directive('ng-model', function(el) {
+    return null;
+  });
+  smallAngular.directive('ng-click', function(el) {
+    return null;
+  });
 
   window.smallAngular = smallAngular;
 }());
