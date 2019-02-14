@@ -33,8 +33,9 @@
     }
   };
 
-  smallAngular.directive('ng-model', function(el) {
-    return null;
+  smallAngular.directive('ng-init', function(scopeRoot, el) {
+    const data = el.getAttribute('ng-init');
+    scopeRoot.eval(data);
   });
 
   smallAngular.directive('ng-click', function(scopeRoot, el) {
