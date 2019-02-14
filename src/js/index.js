@@ -57,6 +57,15 @@
     });
   });
 
+  smallAngular.directive('ng-hide', function(scopeRoot, el) {
+    const data = el.getAttribute('ng-hide');
+
+    el.style.display = scopeRoot.eval(data) ? 'none' : 'block';
+    scopeRoot.$watch(data, () => {
+      el.style.display = scopeRoot.eval(data) ? 'none' : 'block';
+    });
+  });
+
   window.smallAngular = smallAngular;
 
   smallAngular.bootstrap();
