@@ -116,6 +116,10 @@
     scopeRoot.$apply();
   });
 
+  smallAngular.directive('ng-uppercase', function(el) {
+    el.style.textTransform = 'uppercase';
+  });
+
   window.smallAngular = smallAngular;
 
   smallAngular.bootstrap();
