@@ -39,11 +39,10 @@
   });
 
   smallAngular.directive('ng-click', function(scopeRoot, el) {
-    el.addEventListener('click', function(e) {
+    el.addEventListener('click', function() {
       const data = el.getAttribute('ng-click');
 
       scopeRoot.eval(data);
-
       scopeRoot.$apply();
     });
   });
@@ -52,7 +51,7 @@
     const data = el.getAttribute('ng-show');
 
     el.style.display = scopeRoot.eval(data) ? 'block' : 'none';
-    scopeRoot.$watch(data, () => {
+    scopeRoot.$watch(() => {
       el.style.display = scopeRoot.eval(data) ? 'block' : 'none';
     });
   });
@@ -61,22 +60,24 @@
     const data = el.getAttribute('ng-hide');
 
     el.style.display = scopeRoot.eval(data) ? 'none' : 'block';
-    scopeRoot.$watch(data, () => {
+    scopeRoot.$watch(() => {
       el.style.display = scopeRoot.eval(data) ? 'none' : 'block';
     });
   });
 
   smallAngular.directive('ng-bind', function(scopeRoot, el) {
     const data = el.getAttribute('ng-bind');
+
     el.innerHTML = scopeRoot[data];
-    scopeRoot.$watch(data, () => {
+    scopeRoot.$watch(() => {
       el.innerHTML = scopeRoot[data];
     });
   });
 
   smallAngular.directive('ng-model', function(scopeRoot, el) {
-    el.addEventListener('input', function(e) {
+    el.addEventListener('input', function() {
       const data = el.getAttribute('ng-model');
+
       scopeRoot[data] = el.value;
       scopeRoot.$apply();
     });
@@ -87,7 +88,7 @@
     const collectionName = data.split(' ')[2];
     const parentEl = el.parentNode;
 
-    scopeRoot.$watch(collectionName, () => {
+    scopeRoot.$watch(() => {
       const collection = Array.from(scopeRoot[collectionName]);
       const similarEls = Array.from(document.querySelectorAll(`[ng-repeat="${data}"]`));
 
@@ -121,7 +122,6 @@
   });
 
   smallAngular.directive('ng-random-color', function(scopeRoot, el) {
-
     el.addEventListener('click', function() {
       function colorMaker() {
         return Math.floor(Math.random() * 255);
