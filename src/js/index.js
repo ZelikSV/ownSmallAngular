@@ -116,8 +116,21 @@
     scopeRoot.$apply();
   });
 
-  smallAngular.directive('ng-uppercase', function(el) {
+  smallAngular.directive('ng-uppercase', function(scopeRoot, el) {
     el.style.textTransform = 'uppercase';
+  });
+
+  smallAngular.directive('ng-random-color', function(scopeRoot, el) {
+
+    el.addEventListener('click', function() {
+      function colorMaker() {
+        return Math.floor(Math.random() * 255);
+      }
+
+      const bgColor = `rgb(${colorMaker()}, ${colorMaker()}, ${colorMaker()})`;
+
+      el.style.background = bgColor;
+    });
   });
 
   window.smallAngular = smallAngular;

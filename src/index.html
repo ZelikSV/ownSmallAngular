@@ -9,7 +9,7 @@
 
 <body ng-app ng-init="test=false; name='ivan'">
     <div ng-show="test === false" ng-uppercase> hi Ivan!!! </div>
-    <div ng-hide="test === false">Hello i am hide</div>
+    <div ng-hide="test === false" ng-random-color>Hello i am hide</div>
     <input ng-model="name"/>
     <p ng-make-short length="10">qqq qqq qqq qqq qqq qqq qqq</p>
     <p ng-bind="name"></p>
