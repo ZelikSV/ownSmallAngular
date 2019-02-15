@@ -90,6 +90,7 @@
     scopeRoot.$watch(collectionName, () => {
       const collection = Array.from(scopeRoot[collectionName]);
       const similarEls = Array.from(document.querySelectorAll(`[ng-repeat="${data}"]`));
+
       collection.forEach(item => {
         const clonedEl = el.cloneNode(false);
 
@@ -102,6 +103,16 @@
       }
     });
 
+    scopeRoot.$apply();
+  });
+
+  smallAngular.directive('ng-make-short', function(scopeRoot, el) {
+    const lengthString = el.getAttribute('length') || 4;
+
+    el.innerHTML = `${el.innerHTML.slice(0, lengthString)} ...`;
+    scopeRoot.$watch(() => ({}), () => {
+      el.innerText = `${el.innerText.slice(0, lengthString)} ...`;
+    });
     scopeRoot.$apply();
   });
 
