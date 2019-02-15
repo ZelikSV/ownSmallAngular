@@ -1,3 +1,5 @@
+import '../scss/style.scss';
+
 (function() {
   const directives = [];
   const watchers = [];
@@ -51,7 +53,7 @@
     const data = el.getAttribute('ng-show');
 
     el.style.display = scopeRoot.eval(data) ? 'block' : 'none';
-    scopeRoot.$watch(() => {
+    scopeRoot.$watch(data, () => {
       el.style.display = scopeRoot.eval(data) ? 'block' : 'none';
     });
   });
@@ -60,7 +62,7 @@
     const data = el.getAttribute('ng-hide');
 
     el.style.display = scopeRoot.eval(data) ? 'none' : 'block';
-    scopeRoot.$watch(() => {
+    scopeRoot.$watch(data, () => {
       el.style.display = scopeRoot.eval(data) ? 'none' : 'block';
     });
   });
@@ -69,7 +71,7 @@
     const data = el.getAttribute('ng-bind');
 
     el.innerHTML = scopeRoot[data];
-    scopeRoot.$watch(() => {
+    scopeRoot.$watch(data, () => {
       el.innerHTML = scopeRoot[data];
     });
   });
@@ -88,14 +90,14 @@
     const collectionName = data.split(' ')[2];
     const parentEl = el.parentNode;
 
-    scopeRoot.$watch(() => {
+    scopeRoot.$watch(collectionName, () => {
       const collection = Array.from(scopeRoot[collectionName]);
       const similarEls = Array.from(document.querySelectorAll(`[ng-repeat="${data}"]`));
 
       collection.forEach(item => {
         const clonedEl = el.cloneNode(false);
 
-        clonedEl.innerText = item;
+        clonedEl.innerHTML = item;
         parentEl.appendChild(clonedEl);
       });
 
@@ -112,7 +114,7 @@
 
     el.innerHTML = `${el.innerHTML.slice(0, lengthString)} ...`;
     scopeRoot.$watch(() => ({}), () => {
-      el.innerText = `${el.innerText.slice(0, lengthString)} ...`;
+      el.innerText = `${el.innerHTML.slice(0, lengthString)} ...`;
     });
     scopeRoot.$apply();
   });

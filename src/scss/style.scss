@@ -1,1 +1,30 @@
 @import './reset.scss';
+.my-app{
+    margin: 0 auto;
+    padding: 50px 0;
+    border: 1px solid #000;
+    border-radius: 10px;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+p{
+    font-size: 25px;
+    line-height: 50px;
+}
+input{
+    line-height: 30px;
+    border-radius: 5px;
+    font-size: 20px;
+}
+button{
+    width: 150px;
+    border-radius: 8px;
+    line-height: 30px;
+    margin-bottom: 20px;
+    &:focus{
+        outline: none;
+    }
+}
