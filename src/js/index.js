@@ -82,8 +82,30 @@
     });
   });
 
+  smallAngular.directive('ng-repeat', function(scopeRoot, el) {
+    const data = el.getAttribute('ng-repeat');
+    const collectionName = data.split(' ')[2];
+    const parentEl = el.parentNode;
+
+    scopeRoot.$watch(collectionName, () => {
+      const collection = Array.from(scopeRoot[collectionName]);
+      const similarEls = Array.from(document.querySelectorAll(`[ng-repeat="${data}"]`));
+      collection.forEach(item => {
+        const clonedEl = el.cloneNode(false);
+
+        clonedEl.innerText = item;
+        parentEl.appendChild(clonedEl);
+      });
+
+      for (const el of similarEls) {
+        el.remove();
+      }
+    });
+
+    scopeRoot.$apply();
+  });
+
   window.smallAngular = smallAngular;
 
   smallAngular.bootstrap();
 }());
-

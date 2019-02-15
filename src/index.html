@@ -14,6 +14,9 @@
     <p ng-make-short>qqq qqq qqq qqq qqq qqq qqq</p>
     <p ng-bind="name"></p>
     <ul>
+      <li ng-repeat="letter in name"></li>
+    </ul>
+    <ul>
       <li ng-make-long="some">One</li>
     </ul>
     <button ng-click="test = !test">Click Me</button>
