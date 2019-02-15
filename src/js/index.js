@@ -1,3 +1,5 @@
+import '../scss/style.scss';
+
 (function() {
   const directives = [];
   const watchers = [];
@@ -39,11 +41,10 @@
   });
 
   smallAngular.directive('ng-click', function(scopeRoot, el) {
-    el.addEventListener('click', function(e) {
+    el.addEventListener('click', function() {
       const data = el.getAttribute('ng-click');
 
       scopeRoot.eval(data);
-
       scopeRoot.$apply();
     });
   });
@@ -68,6 +69,7 @@
 
   smallAngular.directive('ng-bind', function(scopeRoot, el) {
     const data = el.getAttribute('ng-bind');
+
     el.innerHTML = scopeRoot[data];
     scopeRoot.$watch(data, () => {
       el.innerHTML = scopeRoot[data];
@@ -75,8 +77,9 @@
   });
 
   smallAngular.directive('ng-model', function(scopeRoot, el) {
-    el.addEventListener('input', function(e) {
+    el.addEventListener('input', function() {
       const data = el.getAttribute('ng-model');
+
       scopeRoot[data] = el.value;
       scopeRoot.$apply();
     });
@@ -94,7 +97,7 @@
       collection.forEach(item => {
         const clonedEl = el.cloneNode(false);
 
-        clonedEl.innerText = item;
+        clonedEl.innerHTML = item;
         parentEl.appendChild(clonedEl);
       });
 
@@ -111,7 +114,7 @@
 
     el.innerHTML = `${el.innerHTML.slice(0, lengthString)} ...`;
     scopeRoot.$watch(() => ({}), () => {
-      el.innerText = `${el.innerText.slice(0, lengthString)} ...`;
+      el.innerText = `${el.innerHTML.slice(0, lengthString)} ...`;
     });
     scopeRoot.$apply();
   });
@@ -121,7 +124,6 @@
   });
 
   smallAngular.directive('ng-random-color', function(scopeRoot, el) {
-
     el.addEventListener('click', function() {
       function colorMaker() {
         return Math.floor(Math.random() * 255);

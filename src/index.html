@@ -7,19 +7,25 @@
   <title>Angular</title>
 </head>
 
-<body ng-app ng-init="test=false; name='ivan'">
-    <div ng-show="test === false" ng-uppercase> hi Ivan!!! </div>
-    <div ng-hide="test === false" ng-random-color>Hello i am hide</div>
-    <input ng-model="name"/>
-    <p ng-make-short length="10">qqq qqq qqq qqq qqq qqq qqq</p>
-    <p ng-bind="name"></p>
-    <ul>
-      <li ng-repeat="letter in name"></li>
-    </ul>
-    <ul>
-      <li ng-make-long="some">One</li>
-    </ul>
-    <button ng-click="test = !test">Click Me</button>
+<body >
+  <div class="my-app" ng-app ng-init="test=false; name='ivan'">
+    <div>
+      <p ng-show="test === false" ng-uppercase>Hello my name is Ivan</p>
+      <p ng-hide="test === false">Hello my name is Anatolia</p>
+    </div>
+      <input ng-model="name"/>
+      <p>This is long string
+        <span ng-make-short length="10">qqq qqq qqq qqq qqq qqq qqq</span>
+      </p>
+      <p>This is your value: 
+        <span ng-bind="name"></span>
+      </p>
+      <ul>
+        <li ng-repeat="letter in name"></li>
+      </ul>
+      <button ng-click="test = !test">Change title</button>
+      <button ng-random-color>Change my color</button>
+  </div>
 </body>
 
 </html>
