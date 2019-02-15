@@ -84,23 +84,24 @@
 
   smallAngular.directive('ng-repeat', function(scopeRoot, el) {
     const data = el.getAttribute('ng-repeat');
-    const valueLine = data.split(' ');
-    const valueScope = Array.from(scopeRoot[valueLine[2]]);
+    const collectionName = data.split(' ')[2];
+    const parentEl = el.parentNode;
 
-    valueScope.forEach(item => {
-      const li = document.createElement('li');
-      li.innerHTML = item;
-      el.parentNode.appendChild(li);
-    });
-    el.style.display = 'none';
+    scopeRoot.$watch(collectionName, () => {
+      const collection = Array.from(scopeRoot[collectionName]);
+      const similarEls = Array.from(document.querySelectorAll(`[ng-repeat="${data}"]`));
+      collection.forEach(item => {
+        const clonedEl = el.cloneNode(false);
 
-    scopeRoot.$watch(data, () => {
-      valueScope.forEach(item => {
-        const li = document.createElement('li');
-        li.innerHTML = item;
-        el.parentNode.appendChild(li);
+        clonedEl.innerText = item;
+        parentEl.appendChild(clonedEl);
       });
+
+      for (const el of similarEls) {
+        el.remove();
+      }
     });
+
     scopeRoot.$apply();
   });
 
