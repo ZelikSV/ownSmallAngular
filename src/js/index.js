@@ -124,11 +124,9 @@ import '../scss/style.scss';
   });
 
   smallAngular.directive('ng-random-color', function(scopeRoot, el) {
-    el.addEventListener('click', function() {
-      function colorMaker() {
-        return Math.floor(Math.random() * 255);
-      }
+    const colorMaker = () => Math.floor(Math.random() * 255);
 
+    el.addEventListener('click', function() {
       const bgColor = `rgb(${colorMaker()}, ${colorMaker()}, ${colorMaker()})`;
 
       el.style.background = bgColor;
