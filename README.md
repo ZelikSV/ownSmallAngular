@@ -9,15 +9,13 @@
                 <p>
                     📸&nbsp;First you must install npm modules
                 </p>
-                <p>
-                ```
-                npm install
-                ```
-                or
-                ```
-                yarn install
-                ```
-                </p>
+                
+                `npm install`
+                    
+                <span>or</span>
+               
+                `yarn install`
+                
             </td>
         </tr>
     <tbody>
