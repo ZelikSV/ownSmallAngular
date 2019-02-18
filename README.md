@@ -32,7 +32,7 @@ npm start
 npm build
 ```
 <h2>Description</h2>
-<br>
+
 | Directive        | Description                                                                |
 | ---------------- | -------------------------------------------------------------------------- |
 | `ng-click`       | executes value of this directive on click event;                           |
