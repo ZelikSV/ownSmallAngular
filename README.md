@@ -24,13 +24,13 @@
 </table>
 <br>
 <p>Then you may start development after started your server 🤔</p>
-```
-npm start
-```
+
+`npm start`
+
 <p>When you will finish your project, you can build it and use👋🏼</p>
-```
-npm build
-```
+
+`npm build`
+
 <h2>Description</h2>
 
 | Directive        | Description                                                                |
