@@ -77,11 +77,14 @@ import '../scss/style.scss';
   });
 
   smallAngular.directive('ng-model', function(scopeRoot, el) {
-    el.addEventListener('input', function() {
-      const data = el.getAttribute('ng-model');
+    const data = el.getAttribute('ng-model');
 
+    el.addEventListener('input', function() {
       scopeRoot[data] = el.value;
       scopeRoot.$apply();
+    });
+    scopeRoot.$watch(data, () => {
+      el.value = scopeRoot.eval(data);
     });
   });
 
