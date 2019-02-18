@@ -1,3 +1,5 @@
+/* eslint-disable no-eval*/
+
 import '../scss/style.scss';
 
 (function() {
@@ -37,14 +39,14 @@ import '../scss/style.scss';
 
   smallAngular.directive('ng-init', function(scopeRoot, el) {
     const data = el.getAttribute('ng-init');
-    scopeRoot.eval(data);
+    eval(data);
   });
 
   smallAngular.directive('ng-click', function(scopeRoot, el) {
     el.addEventListener('click', function() {
       const data = el.getAttribute('ng-click');
 
-      scopeRoot.eval(data);
+      eval(data);
       scopeRoot.$apply();
     });
   });
@@ -54,16 +56,16 @@ import '../scss/style.scss';
 
     el.style.display = scopeRoot.eval(data) ? 'block' : 'none';
     scopeRoot.$watch(data, () => {
-      el.style.display = scopeRoot.eval(data) ? 'block' : 'none';
+      el.style.display = eval(data) ? 'block' : 'none';
     });
   });
 
   smallAngular.directive('ng-hide', function(scopeRoot, el) {
     const data = el.getAttribute('ng-hide');
 
-    el.style.display = scopeRoot.eval(data) ? 'none' : 'block';
+    el.style.display = eval(data) ? 'none' : 'block';
     scopeRoot.$watch(data, () => {
-      el.style.display = scopeRoot.eval(data) ? 'none' : 'block';
+      el.style.display = eval(data) ? 'none' : 'block';
     });
   });
 
@@ -84,7 +86,7 @@ import '../scss/style.scss';
       scopeRoot.$apply();
     });
     scopeRoot.$watch(data, () => {
-      el.value = scopeRoot.eval(data);
+      el.value = eval(data);
     });
   });
 
@@ -116,7 +118,7 @@ import '../scss/style.scss';
     const lengthString = el.getAttribute('length') || 4;
 
     scopeRoot.$watch(lengthString, () => {
-      el.innerText = `${el.innerHTML.slice(0, lengthString)} ...`;
+      el.innerHTML = `${el.innerHTML.slice(0, lengthString)} ...`;
     });
     scopeRoot.$apply();
   });
