@@ -31,3 +31,18 @@ npm start
 ```
 npm build
 ```
+<h2>Description</h2>
+<br>
+| Directive        | Description                                                                |
+| ---------------- | -------------------------------------------------------------------------- |
+| `ng-click`       | executes value of this directive on click event;                           |
+| `ng-show`        | shows or hides an element due to the value of argument;                    |
+| `ng-show`        | shows or hides an element due to the value of argument;                    |
+| `ng-init`        | puts data into the scope;                                                  |
+| `ng-hide`        | shows or hides an element due to the value of argument;                    |
+| `ng-bind`        | takes data from scope and puts it into HTML;                               |
+| `ng-repeat`      | creates instances for each element in collection according to template;    |
+| `ng-model`       | connects input value with the value of variable in scope;                  |
+| `ng-make-short`  | cuts the length of text due to the 'length' attribute;                     |
+| `ng-uppercase`   | makes the text uppercase;                                                  |
+| `ng-random-color`| changes background color of element in random way on click;                |
