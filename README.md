@@ -1,25 +1,16 @@
 <h1 align="center">Welcome to my Angular</h1>
 <br>
 <br>
-<table align="center">
-    <tbody>
-        <tr>
-            <td>
-                <h3 align="center">👋🏼 Let's start</h3>
-                <p>
-                    📸&nbsp;First you must install npm modules
-                </p>
+ <h3 align="center">👋🏼 Let's start</h3>
+ <p>
+   📸&nbsp;First you must install npm modules
+ </p>
                 
-                `npm install`
+`npm install`
                     
-                <span>or</span>
+<span>or</span>
                
-                `yarn install`
-                
-            </td>
-        </tr>
-    <tbody>
-</table>
+`yarn install`
 <br>
 <p>Then you may start development after started your server 🤔</p>
 
