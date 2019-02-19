@@ -32,6 +32,7 @@ import '../scss/style.scss';
     bootstrap(node) {
       const appWrapper = node || document.querySelector('[ng-app]');
       const child = appWrapper.querySelectorAll('*');
+
       this.compile(appWrapper);
       child.forEach(this.compile);
     }
@@ -39,6 +40,7 @@ import '../scss/style.scss';
 
   smallAngular.directive('ng-init', function(scopeRoot, el) {
     const data = el.getAttribute('ng-init');
+
     window.eval(data);
   });
 
@@ -55,7 +57,7 @@ import '../scss/style.scss';
     const data = el.getAttribute('ng-show');
 
     el.style.display = eval(data) ? 'block' : 'none';
-    scopeRoot.$watch(data, () => {
+    scopeRoot.$watch(() => eval(el.getAttribute('ng-show')), () => {
       el.style.display = eval(data) ? 'block' : 'none';
     });
   });
@@ -64,7 +66,7 @@ import '../scss/style.scss';
     const data = el.getAttribute('ng-hide');
 
     el.style.display = eval(data) ? 'none' : 'block';
-    scopeRoot.$watch(data, () => {
+    scopeRoot.$watch(() => eval(el.getAttribute('ng-hide')), () => {
       el.style.display = eval(data) ? 'none' : 'block';
     });
   });
@@ -73,7 +75,7 @@ import '../scss/style.scss';
     const data = el.getAttribute('ng-bind');
 
     el.innerHTML = scopeRoot[data];
-    scopeRoot.$watch(data, () => {
+    scopeRoot.$watch(() => el.getAttribute('ng-bind'), () => {
       el.innerHTML = scopeRoot[data];
     });
   });
@@ -92,13 +94,11 @@ import '../scss/style.scss';
 
   smallAngular.directive('ng-repeat', function(scopeRoot, el) {
     const data = el.getAttribute('ng-repeat');
-    const collectionName = data.split(' ')[2];
+    const [, , items] = data.split(' ');
     const parentEl = el.parentNode;
-
-    scopeRoot.$watch(collectionName, () => {
-      const collection = Array.from(scopeRoot[collectionName]);
-      const similarEls = Array.from(document.querySelectorAll(`[ng-repeat="${data}"]`));
-
+    const repeatMethod = () => {
+      const collection = Array.from(scopeRoot[items]);
+      const similarEls = document.querySelectorAll(`[ng-repeat="${data}"]`);
       collection.forEach(item => {
         const clonedEl = el.cloneNode(false);
 
@@ -109,18 +109,20 @@ import '../scss/style.scss';
       for (const el of similarEls) {
         el.remove();
       }
+    };
+    repeatMethod();
+    scopeRoot.$watch(items, () => {
+      repeatMethod();
     });
-
-    scopeRoot.$apply();
   });
 
   smallAngular.directive('ng-make-short', function(scopeRoot, el) {
     const lengthString = el.getAttribute('length') || 4;
 
+    el.innerHTML = `${el.innerHTML.slice(0, lengthString)} ...`;
     scopeRoot.$watch(() => el.getAttribute('length'), () => {
       el.innerHTML = `${el.innerHTML.slice(0, lengthString)} ...`;
     });
-    scopeRoot.$apply();
   });
 
   smallAngular.directive('ng-uppercase', function(scopeRoot, el) {
