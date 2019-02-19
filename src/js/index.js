@@ -117,7 +117,7 @@ import '../scss/style.scss';
   smallAngular.directive('ng-make-short', function(scopeRoot, el) {
     const lengthString = el.getAttribute('length') || 4;
 
-    scopeRoot.$watch(lengthString, () => {
+    scopeRoot.$watch(() => el.getAttribute('length'), () => {
       el.innerHTML = `${el.innerHTML.slice(0, lengthString)} ...`;
     });
     scopeRoot.$apply();
