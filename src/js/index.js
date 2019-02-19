@@ -39,7 +39,7 @@ import '../scss/style.scss';
 
   smallAngular.directive('ng-init', function(scopeRoot, el) {
     const data = el.getAttribute('ng-init');
-    eval(data);
+    window.eval(data);
   });
 
   smallAngular.directive('ng-click', function(scopeRoot, el) {
@@ -54,7 +54,7 @@ import '../scss/style.scss';
   smallAngular.directive('ng-show', function(scopeRoot, el) {
     const data = el.getAttribute('ng-show');
 
-    el.style.display = scopeRoot.eval(data) ? 'block' : 'none';
+    el.style.display = eval(data) ? 'block' : 'none';
     scopeRoot.$watch(data, () => {
       el.style.display = eval(data) ? 'block' : 'none';
     });
@@ -117,7 +117,7 @@ import '../scss/style.scss';
   smallAngular.directive('ng-make-short', function(scopeRoot, el) {
     const lengthString = el.getAttribute('length') || 4;
 
-    scopeRoot.$watch(lengthString, () => {
+    scopeRoot.$watch(() => el.getAttribute('length'), () => {
       el.innerHTML = `${el.innerHTML.slice(0, lengthString)} ...`;
     });
     scopeRoot.$apply();
