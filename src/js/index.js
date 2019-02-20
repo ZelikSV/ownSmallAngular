@@ -24,7 +24,7 @@ import '../scss/style.scss';
           const { name } = node.attributes[i];
 
           if (name === item.name) {
-            item.func(scopeRoot, node, null);
+            item.func(scopeRoot, node, node.attributes);
           }
         }
       });
@@ -66,7 +66,7 @@ import '../scss/style.scss';
     const data = el.getAttribute('ng-hide');
 
     el.style.display = eval(data) ? 'none' : 'block';
-    scopeRoot.$watch(() => eval(el.getAttribute('ng-hide')), () => {
+    scopeRoot.$watch(() => eval(data), () => {
       el.style.display = eval(data) ? 'none' : 'block';
     });
   });
@@ -75,7 +75,7 @@ import '../scss/style.scss';
     const data = el.getAttribute('ng-bind');
 
     el.innerHTML = scopeRoot[data];
-    scopeRoot.$watch(() => el.getAttribute('ng-bind'), () => {
+    scopeRoot.$watch(() => data, () => {
       el.innerHTML = scopeRoot[data];
     });
   });
@@ -87,7 +87,7 @@ import '../scss/style.scss';
       scopeRoot[data] = el.value;
       scopeRoot.$apply();
     });
-    scopeRoot.$watch(data, () => {
+    scopeRoot.$watch(() => data, () => {
       el.value = eval(data);
     });
   });
@@ -97,31 +97,33 @@ import '../scss/style.scss';
     const [, , items] = data.split(' ');
     const parentEl = el.parentNode;
     const repeatMethod = () => {
-      const collection = Array.from(scopeRoot[items]);
-      const similarEls = document.querySelectorAll(`[ng-repeat="${data}"]`);
-      collection.forEach(item => {
+      const collection = scopeRoot[items];
+      const similarEls = parentEl.querySelectorAll('[ng-repeat]');
+
+      for (const item of collection) {
         const clonedEl = el.cloneNode(false);
 
         clonedEl.innerHTML = item;
         parentEl.appendChild(clonedEl);
-      });
+      }
 
       for (const el of similarEls) {
         el.remove();
       }
     };
     repeatMethod();
-    scopeRoot.$watch(items, () => {
+    scopeRoot.$watch(() => ({}), () => {
       repeatMethod();
     });
   });
 
-  smallAngular.directive('ng-make-short', function(scopeRoot, el) {
+  smallAngular.directive('ng-make-short', function(scopeRoot, el, attr) {
     const lengthString = el.getAttribute('length') || 4;
+    const shortString = el.innerHTML.slice(0, lengthString);
 
-    el.innerHTML = `${el.innerHTML.slice(0, lengthString)} ...`;
+    el.innerHTML = `${shortString} ...`;
     scopeRoot.$watch(() => el.getAttribute('length'), () => {
-      el.innerHTML = `${el.innerHTML.slice(0, lengthString)} ...`;
+      el.innerHTML = `${shortString} ...`;
     });
   });
 
