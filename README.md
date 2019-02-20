@@ -26,7 +26,6 @@
 | ---------------- | -------------------------------------------------------------------------- |
 | `ng-click`       | executes value of this directive on click event;                           |
 | `ng-show`        | shows or hides an element due to the value of argument;                    |
-| `ng-show`        | shows or hides an element due to the value of argument;                    |
 | `ng-init`        | puts data into the scope;                                                  |
 | `ng-hide`        | shows or hides an element due to the value of argument;                    |
 | `ng-bind`        | takes data from scope and puts it into HTML;                               |
