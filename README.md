@@ -35,3 +35,5 @@
 | `ng-make-short`  | cuts the length of text due to the 'length' attribute;                     |
 | `ng-uppercase`   | makes the text uppercase;                                                  |
 | `ng-random-color`| changes background color of element in random way on click;                |
+
+A simple example of work  https://zeliksv.github.io/OwnAngular/
